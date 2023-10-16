@@ -1,16 +1,28 @@
-# This is a sample Python script.
+# Problem 13.
+# Roman to Integer
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000,
+        }
+
+        result = 0
+        for i in range(len(s) - 1):
+            if roman[s[i]] < roman[s[i + 1]]:
+                result -= roman[s[i]]
+            else:
+                result += roman[s[i]]
+        return result + roman[s[-1]]
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    inputs = ["III", "LVIII", "MCMXCIV"]
+    for input in inputs:
+        print("Input: " + input + " Output: " + str(Solution().romanToInt(input)))
