@@ -1,16 +1,24 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 14.
+# Longest Common Prefix
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        prefix = ""
+        # strings order by grammar e.g. flight, flow, flower
+        sortedStrings = sorted(strs)
+        first = sortedStrings[0]
+        last = sortedStrings[-1]
+        for i in range(min(len(first), len(last))):
+            if first[i] != last[i]:
+                return prefix
+            else:
+                prefix += first[i]
+        return prefix
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    inputs = [["flower", "flow", "flight"], ["dog", "racecar", "car"]]
+    for stringsArray in inputs:
+        print("Input: " + str(stringsArray) + " Output: " + Solution().longestCommonPrefix(stringsArray))
