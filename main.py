@@ -1,16 +1,27 @@
-# This is a sample Python script.
+# Problem 20.
+# Valid Parenthesis.
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+class Solution:
+    def isValid(self, s: str) -> bool:
+        # stack of opening parenthesis
+        stack = []
+        for parenthesis in s:
+            if parenthesis == "(" or parenthesis == "[" or parenthesis == "{":
+                stack.append(parenthesis)
+            else:
+                if (
+                        not stack or
+                        (stack[-1] == "(" and parenthesis != ')') or
+                        (stack[-1] == "[" and parenthesis != ']') or
+                        (stack[-1] == "{" and parenthesis != '}')
+                ):
+                    return False
+                stack.pop()
+        return len(stack) == 0
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    inputs = ["()", "()[]{}", "(]"]
+    for string in inputs:
+        print("Input: " + string + " Output: " + str(Solution().isValid(string)))
