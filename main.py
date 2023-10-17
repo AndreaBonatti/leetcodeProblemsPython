@@ -1,16 +1,19 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 26.
+# Remove Duplicates from Sorted Array
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        counter = 1
+        for i in range(1, len(nums)):
+            if nums[i] != nums[i - 1]:
+                nums[counter] = nums[i]
+                counter += 1
+        return counter
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    inputs = [[1, 1, 2], [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]]
+    for array in inputs:
+        print("Input: " + str(array) + " Output: " + str(Solution().removeDuplicates(array)))
