@@ -1,79 +1,33 @@
 # Problem 2050.
 # Parallel Courses III.
 import copy
+from collections import defaultdict, deque
 from typing import List, Dict
 
 
 class Solution:
-
-    def __init__(self):
-        self.paths = []
-
     def minimumTime(self, n: int, relations: List[List[int]], time: List[int]) -> int:
+        # Build the graph and calculate in-degrees
+        graph = defaultdict(list)
+        in_degree = [0] * (n + 1)
+        for u, v in relations:
+            graph[u].append(v)
+            in_degree[v] += 1
 
-        if n == 1:
-            return time[0]
-        if not relations:
-            maxTime = 0
-            for nodeTime in time:
-                if maxTime < nodeTime:
-                    maxTime = nodeTime
-            return maxTime
+        # Initialize the dist array and queue
+        dist = [0] + time
+        queue = deque([i for i in range(1, n + 1) if in_degree[i] == 0])
 
-        # Find the roots
-        roots = []
-        notRoots = []
-        for relation in relations:
-            possibleRoot = relation[0]
-            notRoot = relation[1]
-            if possibleRoot not in roots and possibleRoot not in notRoots:
-                roots.insert(0, possibleRoot)
-            if notRoot not in notRoots:
-                notRoots.insert(0, notRoot)
+        # Perform Topological Sort
+        while queue:
+            course = queue.popleft()
+            for next_course in graph[course]:
+                dist[next_course] = max(dist[next_course], dist[course] + time[next_course - 1])
+                in_degree[next_course] -= 1
+                if in_degree[next_course] == 0:
+                    queue.append(next_course)
 
-        # Find the dictionary from the relations to use dfs
-        adjecentDict = {}
-        for i in range(1, n + 1):
-            adjecentDict[i] = []
-        for relation in relations:
-            adjecentDict[relation[0]].append(relation[1])
-
-        # Find the possible ends
-        ends = []
-        for node, links in adjecentDict.items():
-            if not links:
-                ends.append(node)
-
-        # Find all the possible paths
-        for root in roots:
-            for end in ends:
-                self.findAllPaths(adjecentDict, root, end)
-
-        # Calculate the max time
-        output = 0
-        for path in self.paths:
-            cost = 0
-            for node in path:
-                cost += time[node - 1]
-            if cost > output:
-                output = cost
-        return output
-
-    # This function uses DFS at its core to find all the paths in a graph
-    def dfs(self, adjDict: Dict[int, List[int]], src: int, dst: int, path: List[int]):
-        if src == dst:
-            self.paths.append(copy.deepcopy(path))
-        else:
-            for node in adjDict[src]:
-                path.append(node)
-                self.dfs(adjDict, node, dst, path)
-                path.pop()
-
-    def findAllPaths(self, adjDict: Dict[int, List[int]], src: int, dst: int):
-        path = [src]
-
-        # Use depth first search (with backtracking) to find all the paths in the graph
-        self.dfs(adjDict, src, dst, path)
+        return max(dist)
 
 
 if __name__ == '__main__':
