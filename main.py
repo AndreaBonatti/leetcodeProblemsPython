@@ -1,16 +1,31 @@
-# This is a sample Python script.
+# Problem 844.
+# Backspacing String Compare.
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class Solution:
+    def getProcessedString(self, s: str):
+        stack = []
+        for char in s:
+            if char == '#':
+                if len(stack) != 0:
+                    stack.pop()
+            else:
+                stack.append(char)
+        return stack
+
+    def backspaceCompare(self, s: str, t: str) -> bool:
+        return self.getProcessedString(s) == self.getProcessedString(t)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    s = "ab#c"
+    t = "ad#c"
+    print("Input: s = " + s + " t = " + t)
+    print("Output: " + str(Solution().backspaceCompare(s, t)))
+    s = "ab##"
+    t = "c#d#"
+    print("Input: s = " + s + " t = " + t)
+    print("Output: " + str(Solution().backspaceCompare(s, t)))
+    s = "a#c"
+    t = "b"
+    print("Input: s = " + s + " t = " + t)
+    print("Output: " + str(Solution().backspaceCompare(s, t)))
