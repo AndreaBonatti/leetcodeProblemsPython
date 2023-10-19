@@ -1,16 +1,25 @@
-# This is a sample Python script.
+# Problem 3.
+# Longest Substring Without Repeating Characters.
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        length = 0
+        # Map of the last seen position of a char
+        seen = {}
+        left = 0
+        for right in range(len(s)):
+            char = s[right]
+            # If we found a char already seen we move the left pointer
+            if char in seen and seen[char] >= left:
+                left = seen[char] + 1
+            else:
+                # Every time we found a char not seen in the current substring we try to update the length
+                length = max(length, right - left + 1)
+            seen[char] = right
+        return length
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    inputs = ["abcabcbb", "bbbbb", "pwwkew"]
+    for string in inputs:
+        print("Input: \"" + string + "\" Output: " + str(Solution().lengthOfLongestSubstring(string)))
