@@ -1,16 +1,34 @@
-# This is a sample Python script.
+# Problem 5.
+# Longest Palindromic Substring.
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class Solution:
+    def isPalindorme(self, s: str) -> bool:
+        return s == s[::-1]
+
+    def longestPalindrome(self, s: str) -> str:
+        if len(s) == 0:
+            return ""
+        length = 1
+        longestPalindrome = s[0]
+        allSubstrings = []
+        start = 0
+        while start < len(s) - 1:
+            for end in range(start + 1, len(s) + 1):
+                if s[start:end] not in allSubstrings:
+                    allSubstrings.append(s[start:end])
+                    if self.isPalindorme(s[start:end]) and length < len(s[start:end]):
+                        length = len(s[start:end])
+                        longestPalindrome = s[start:end]
+            start += 1
+        return longestPalindrome
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # string = "bb"
+    # print("Input: " + string + " Output: " + Solution().longestPalindrome(string))
+    # string = "babad"
+    # print("Input: " + string + " Output: " + Solution().longestPalindrome(string))
+    # string = "cbbd"
+    # print("Input: " + string + " Output: " + Solution().longestPalindrome(string))
+    string = "civilwartestingwhetherthatnaptionoranynartionsoconceivedandsodedicatedcanlongendureWeareqmetonagreatbattlefiemldoftzhatwarWehavecometodedicpateaportionofthatfieldasafinalrestingplaceforthosewhoheregavetheirlivesthatthatnationmightliveItisaltogetherfangandproperthatweshoulddothisButinalargersensewecannotdedicatewecannotconsecratewecannothallowthisgroundThebravelmenlivinganddeadwhostruggledherehaveconsecrateditfaraboveourpoorponwertoaddordetractTgheworldadswfilllittlenotlenorlongrememberwhatwesayherebutitcanneverforgetwhattheydidhereItisforusthelivingrathertobededicatedheretotheulnfinishedworkwhichtheywhofoughtherehavethusfarsonoblyadvancedItisratherforustobeherededicatedtothegreattdafskremainingbeforeusthatfromthesehonoreddeadwetakeincreaseddevotiontothatcauseforwhichtheygavethelastpfullmeasureofdevotionthatweherehighlyresolvethatthesedeadshallnothavediedinvainthatthisnationunsderGodshallhaveanewbirthoffreedomandthatgovernmentofthepeoplebythepeopleforthepeopleshallnotperishfromtheearth"
+    print("Input: " + string + " Output: " + Solution().longestPalindrome(string))
