@@ -1,16 +1,26 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 27.
+# Remove Element.
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def removeElement(self, nums: List[int], val: int) -> int:
+        length = 0
+        for i in range(len(nums)):
+            if nums[i] != val:
+                nums[length] = nums[i]
+                length += 1
+        return length
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    nums = [3, 2, 2, 3]
+    val = 3
+    print("Input: " + str(nums) + ", val= " + str(val))
+    length = Solution().removeElement(nums, val)
+    print("Output: " + str(length) + " val = " + str(nums[0:length]))
+    nums = [0, 1, 2, 2, 3, 0, 4, 2]
+    val = 2
+    print("Input: " + str(nums) + ", val= " + str(val))
+    length = Solution().removeElement(nums, val)
+    print("Output: " + str(length) + " val = " + str(nums[0:length]))
