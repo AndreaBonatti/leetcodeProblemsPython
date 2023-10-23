@@ -1,16 +1,27 @@
-# This is a sample Python script.
+# Problem 1446.
+# Consecutive Characters.
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class Solution:
+    def maxPower(self, s: str) -> int:
+        if len(s) <= 1:
+            return len(s)
+        maxPower = 1
+        temp = 1
+        for i in range(1, len(s)):
+            if s[i] == s[i-1]:
+                temp += 1
+                if temp > maxPower:
+                    maxPower = temp
+            else:
+                temp = 1
+
+        return maxPower
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    s = "cc"
+    print("Input: s = " + s + " - Output: " + str(Solution().maxPower(s)))
+    s = "leetcode"
+    print("Input: s = " + s + " - Output: " + str(Solution().maxPower(s)))
+    s = "abbcccddddeeeeedcba"
+    print("Input: s = " + s + " - Output: " + str(Solution().maxPower(s)))
