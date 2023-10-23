@@ -1,16 +1,38 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 17.
+# Letter Combinations of a Phone Number.
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        digitsToLetters = {
+            "2": ["a", "b", "c"],
+            "3": ["d", "e", "f"],
+            "4": ["g", "h", "i"],
+            "5": ["j", "k", "l"],
+            "6": ["m", "n", "o"],
+            "7": ["p", "q", "r", "s"],
+            "8": ["t", "u", "v"],
+            "9": ["w", "x", "y", "z"]
+        }
+        combinations = []
+        for digit in digits:
+            if len(combinations) == 0:
+                combinations = digitsToLetters[digit]
+            else:
+                temp = []
+                for letter in digitsToLetters[digit]:
+                    for comb in combinations:
+                        temp.append(comb + letter)
+                combinations = temp
+
+        return combinations
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    digits = "23"
+    print("Input: digits = \"" + digits + "\" - Output: " + str(Solution().letterCombinations(digits)))
+    digits = ""
+    print("Input: digits = \"" + digits + "\" - Output: " + str(Solution().letterCombinations(digits)))
+    digits = "2"
+    print("Input: digits = \"" + digits + "\" - Output: " + str(Solution().letterCombinations(digits)))
