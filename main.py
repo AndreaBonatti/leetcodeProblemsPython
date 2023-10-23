@@ -1,16 +1,25 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 342.
+# Power of four.
+import math
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def isPowerOfFour(self, n: int) -> bool:
+        # If 'n' is 1, it is a power of four
+        if n == 1:
+            return True
+        # If 'n' is non-positive, it cannot be a power of four
+        elif n <= 0:
+            return False
+
+        # Calculate the logarithm of 'n' with base 4
+        logarithm_base4 = math.log(n) / math.log(4)
+
+        # Check if the result of the logarithmic operation is an integer
+        return logarithm_base4 == int(logarithm_base4)
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    inputs = [16, 5, 1]
+    for n in inputs:
+        print("Input: n= " + str(n) + " Output: " + str(Solution().isPowerOfFour(n)))
