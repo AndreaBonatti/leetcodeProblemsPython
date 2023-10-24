@@ -1,6 +1,5 @@
 # Problem 222.
 # Count Complete Tree Nodes.
-from collections import deque
 from typing import Optional
 
 
@@ -18,23 +17,28 @@ class Solution:
         if not root:
             return 0
 
-        queue = deque([root])
-        result = 0
+        def depthLeft(node: Optional[TreeNode]) -> int:
+            depth = 0
+            while node:
+                depth += 1
+                node = node.left
+            return depth
 
-        # BFS
-        while queue:
-            level_nodes_number = len(queue)
+        def depthRight(node: Optional[TreeNode]) -> int:
+            depth = 0
+            while node:
+                depth += 1
+                node = node.right
+            return depth
 
-            for _ in range(level_nodes_number):
-                node = queue.popleft()
-                result += 1
+        dl = depthLeft(root.left)
+        dr = depthRight(root.right)
 
-                # Add the children node to the queue (ignored in this for because we consider the level_nodes_number)
-                for child in [node.left, node.right]:
-                    if child:
-                        queue.append(child)
-
-        return result
+        # This condition has sense only for the specific requirement of the problem
+        if dl == dr:
+            return 2 ** (dl + 1) - 1
+        else:
+            return 1 + self.countNodes(root.left) + self.countNodes(root.right)
 
 
 if __name__ == '__main__':
