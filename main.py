@@ -1,16 +1,41 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 1030.
+# Matrix Cells in Distance Order
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def allCellsDistOrder(self, rows: int, cols: int, rCenter: int, cCenter: int) -> List[List[int]]:
+        cellsWithDistance = []
+        for row in range(rows):
+            for col in range(cols):
+                distance = abs(row - rCenter) + abs(col - cCenter)
+                cellsWithDistance.append({
+                    "distance": distance,
+                    "value": [row, col]
+                })
+
+        return [cell["value"] for cell in sorted(cellsWithDistance, key=lambda x: x["distance"])]
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    rows = 1
+    cols = 2
+    rCenter = 0
+    cCenter = 0
+    print("Input: rows = " + str(rows) + " cols = " + str(cols)
+          + " rCenter = " + str(rCenter) + " cCenter = " + str(cCenter))
+    print("Output: " + str(Solution().allCellsDistOrder(rows, cols, rCenter, cCenter)))
+    rows = 2
+    cols = 2
+    rCenter = 0
+    cCenter = 1
+    print("Input: rows = " + str(rows) + " cols = " + str(cols)
+          + " rCenter = " + str(rCenter) + " cCenter = " + str(cCenter))
+    print("Output: " + str(Solution().allCellsDistOrder(rows, cols, rCenter, cCenter)))
+    rows = 2
+    cols = 3
+    rCenter = 1
+    cCenter = 2
+    print("Input: rows = " + str(rows) + " cols = " + str(cols)
+          + " rCenter = " + str(rCenter) + " cCenter = " + str(cCenter))
+    print("Output: " + str(Solution().allCellsDistOrder(rows, cols, rCenter, cCenter)))
