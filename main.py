@@ -5,16 +5,11 @@ from typing import List
 
 class Solution:
     def allCellsDistOrder(self, rows: int, cols: int, rCenter: int, cCenter: int) -> List[List[int]]:
-        cellsWithDistance = []
-        for row in range(rows):
-            for col in range(cols):
-                distance = abs(row - rCenter) + abs(col - cCenter)
-                cellsWithDistance.append({
-                    "distance": distance,
-                    "value": [row, col]
-                })
+        def distance(cell: [int, int]) -> int:
+            return abs(cell[0] - rCenter) + abs(cell[1] - cCenter)
 
-        return [cell["value"] for cell in sorted(cellsWithDistance, key=lambda x: x["distance"])]
+        cells = [[row, col] for row in range(rows) for col in range(cols)]
+        return sorted(cells, key=distance)
 
 
 if __name__ == '__main__':
