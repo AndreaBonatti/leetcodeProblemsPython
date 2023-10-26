@@ -1,16 +1,12 @@
-# This is a sample Python script.
+# Problem 258.
+# Add Digits.
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+class Solution:
+    def addDigits(self, num: int) -> int:
+        return num if num <= 9 else self.addDigits(sum([int(i) for i in str(num)]))
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    for num in [38, 0]:
+        print("Input: num = " + str(num))
+        print("Output: " + str(Solution().addDigits(num)))
