@@ -6,8 +6,11 @@ from typing import List
 class Solution:
     def divisibilityArray(self, word: str, m: int) -> List[int]:
         result = [0] * len(word)
+        # ab (mod m) ≡ ((a (mod m) * 10) + (b (mod m))) mod m
+        module = 0
         for i in range(0, len(word)):
-            if int(word[:i + 1]) % m == 0:
+            module = (module * 10 + int(word[i])) % m
+            if module % m == 0:
                 result[i] = 1
         return result
 
