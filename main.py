@@ -1,16 +1,27 @@
-# This is a sample Python script.
+# Problem 715.
+# Range Module.
 
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+class RangeModule:
+
+    def __init__(self):
+        self.numbers = []
+
+    def addRange(self, left: int, right: int) -> None:
+        for number in range(left, right):
+            if number not in self.numbers:
+                self.numbers.append(number)
+
+    def queryRange(self, left: int, right: int) -> bool:
+        for number in range(left, right):
+            if number not in self.numbers:
+                return False
+        return True
+
+    def removeRange(self, left: int, right: int) -> None:
+        for number in range(left, right):
+            if number in self.numbers:
+                self.numbers.remove(number)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
