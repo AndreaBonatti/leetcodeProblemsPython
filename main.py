@@ -5,11 +5,13 @@ from typing import List
 
 class Solution:
     def divisibilityArray(self, word: str, m: int) -> List[int]:
+        # To avoid to use int(word[i]) that is slow
+        conversion = {"0": 0, "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9}
         result = [0] * len(word)
         # ab (mod m) ≡ ((a (mod m) * 10) + (b (mod m))) mod m
         module = 0
         for i in range(0, len(word)):
-            module = (module * 10 + int(word[i])) % m
+            module = (module * 10 + conversion[word[i]]) % m
             if module % m == 0:
                 result[i] = 1
         return result
