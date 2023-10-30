@@ -1,16 +1,20 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 1356.
+# Sort Integers by The Number of 1 Bits
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def sortByBits(self, arr: List[int]) -> List[int]:
+        def numbers_of_ones(number: int):
+            return sum((number >> i) & 1 for i in range(32)), number
+
+        return sorted(arr, key=lambda number: numbers_of_ones(number))
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    arr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    print("Input: arr = " + str(arr))
+    print("Output: " + str(Solution().sortByBits(arr)))
+    arr = [1024, 512, 256, 128, 64, 32, 16, 8, 4, 2, 1]
+    print("Input: arr = " + str(arr))
+    print("Output: " + str(Solution().sortByBits(arr)))
