@@ -1,16 +1,57 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 111.
+# Minimum Depth of Binary Tree.
+from typing import Optional
 
 
-# Press the green button in the gutter to run the script.
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+class Solution:
+    def minDepth(self, root: Optional[TreeNode]) -> int:
+        def walk(root: Optional[TreeNode]):
+            if root.left is None and root.right is None:
+                return 1
+            if root.left and root.right is None:
+                return 1 + walk(root.left)
+            if root.left is None and root.right:
+                return 1 + walk(root.right)
+            if root.left and root.right:
+                return min(1 + walk(root.left), 1 + walk(root.right))
+
+        return walk(root) if root else 0
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    root = TreeNode(
+        3,
+        TreeNode(9),
+        TreeNode(
+            20,
+            TreeNode(15),
+            TreeNode(7)
+        )
+    )
+    print("Output: " + str(Solution().minDepth(root)))
+    root = TreeNode(
+        2,
+        None,
+        TreeNode(
+            3,
+            None,
+            TreeNode(
+                4,
+                None,
+                TreeNode(
+                    5,
+                    None,
+                    TreeNode(6)
+                )
+            )
+        )
+    )
+    print("Output: " + str(Solution().minDepth(root)))
