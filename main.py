@@ -1,16 +1,23 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 2433.
+# Find The Original Array of Prefix Xor.
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def findArray(self, pref: List[int]) -> List[int]:
+        last = pref[0]
+        result = [last]
+        for element in pref[1:]:
+            current = element ^ last
+            result.append(current)
+            last ^= current
+        return result
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    pref = [5, 2, 0, 3, 1]
+    print("Input: pref = " + str(pref))
+    print("Output: " + str(Solution().findArray(pref)))
+    pref = [13]
+    print("Input: pref = " + str(pref))
+    print("Output: " + str(Solution().findArray(pref)))
