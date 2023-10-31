@@ -1,16 +1,45 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+# Problem 833.
+# Find And Replace in String.
+from typing import List
 
 
-# Press the green button in the gutter to run the script.
+class Solution:
+    def findReplaceString(self, s: str, indices: List[int], sources: List[str], targets: List[str]) -> str:
+        # iterate from the greater index to the smallest
+        for i, src, tg in sorted(list(zip(indices, sources, targets)), reverse=True):
+            # if found the pattern matches with the source, replace with the target accordingly
+            if s[i:i+len(src)] == src: s = s[:i] + tg + s[i+len(src):]
+        return s
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    s = "abcd"
+    indices = [2, 2]
+    sources = ["cde","cdef"]
+    targets = ["fe","f"]
+    print("Inputs:")
+    print("s = " + s)
+    print("indices = " + str(indices))
+    print("sources = " + str(sources))
+    print("targets = " + str(targets))
+    print("Output: " + str(Solution().findReplaceString(s, indices, sources, targets)))
+    s = "abcd"
+    indices = [0, 2]
+    sources = ["a", "cd"]
+    targets = ["eee", "ffff"]
+    print("Inputs:")
+    print("s = " + s)
+    print("indices = " + str(indices))
+    print("sources = " + str(sources))
+    print("targets = " + str(targets))
+    print("Output: " + str(Solution().findReplaceString(s, indices, sources, targets)))
+    s = "abcd"
+    indices = [0, 2]
+    sources = ["ab", "ec"]
+    targets = ["eee", "ffff"]
+    print("Inputs:")
+    print("s = " + s)
+    print("indices = " + str(indices))
+    print("sources = " + str(sources))
+    print("targets = " + str(targets))
+    print("Output: " + str(Solution().findReplaceString(s, indices, sources, targets)))
