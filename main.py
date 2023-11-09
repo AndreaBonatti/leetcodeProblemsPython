@@ -1,16 +1,24 @@
-# This is a sample Python script.
-
-# Press Maiusc+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Problem 1759.
+# Count Number of Homogenous Substrings.
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+class Solution:
+    def countHomogenous(self, s: str) -> int:
+        counter = 0
+        left = 0
+        for right in range(len(s)):
+            # if the left and right characters are the same we add the length of the string from left to right
+            if s[left] == s[right]:
+                counter += right - left + 1
+            else:
+                # counter increased by 1 for the new character, we move the left pointer because this is a new character
+                counter += 1
+                left = right
+        return counter % (10 ** 9 + 7)
 
 
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    inputs = ["abbcccaa", "xy", "zzzzz"]
+    for s in inputs:
+        print(f"Input: s = {s}")
+        print(f"Output: {Solution().countHomogenous(s)}")
